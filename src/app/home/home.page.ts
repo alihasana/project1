@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'app-home',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  constructor(private auth: AuthService){}
+  theData: string;
+  goLoginFb() {
+    this.auth.facebookConnect().then((user) => {
+      console.log(user);
+      this.theData = JSON.stringify(user);
+    })
+  }
 
 }
